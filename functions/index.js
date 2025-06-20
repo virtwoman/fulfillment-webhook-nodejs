@@ -1,36 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { WebhookClient } = require('dialogflow-fulfillment');
-
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
+// Productos disponibles
 const productos = {
-  ropero: { nombre: "Ropero", precio: 20,000, stock: true },
-  cama: { nombre: "Cama", precio: 9,000, stock: true },
-  chinero: { nombre: "Chinero", precio: 19,500, stock: false },
-  // Agregá más productos aquí
+  ropero: { nombre: "Ropero", precio: 20000, stock: true },
+  cama: { nombre: "Cama", precio: 18000, stock: false },
+  chinero: { nombre: "Chinero", precio: 12500, stock: true }
 };
 
-app.post('/webhook', (req, res) => {
- /* const agent = new WebhookClient({ request: req, response: res });
-
-  function welcome(agent) {
-    agent.add(`¡Hola! Este es un webhook funcionando en Render 🎉`);
-  }
-
-  let intentMap = new Map();
-  intentMap.set('Default Welcome Intent', welcome);
-
-  agent.handleRequest(intentMap);
-});
-
-app.listen(port, () => {
-  console.log(`🚀 Server listening on port ${port}`);
-}); */
-const tipo = req.body.queryResult.parameters.tipoMueble?.toLowerCase();
+app.post("/webhook", (req, res) => {
+  const tipo = req.body.queryResult.parameters.tipoMueble?.toLowerCase();
 
   if (!tipo || !productos[tipo]) {
     return res.json({
@@ -64,4 +46,9 @@ ${prod.stock ? "Disponible en stock." : "No disponible actualmente."} ¿Qué des
       }
     ]
   });
+});
+
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
+  console.log(`Servidor webhook activo en puerto ${PORT}`);
 });
