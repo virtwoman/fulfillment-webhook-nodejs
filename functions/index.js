@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const apa = express();
+
+const app = express();
 
 app.use(bodyParser.json());
 
+app.use(bodyParser.json());
 // Productos disponibles
 const productos = {
   ropero: { nombre: "Ropero", precio: 20000, stock: true },
