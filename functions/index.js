@@ -17,7 +17,7 @@ const productos = {
 };
 
 app.post("/webhook", (req, res) => {
-  const tipo = req.body.queryResult.parameters.tipoMueble?.toLowerCase();
+  const tipo = req.body.queryResult.parameters.TipoMueble?.toLowerCase();
 
   if (!tipo || !productos[tipo]) {
     return res.json({
