@@ -28,10 +28,11 @@ app.post("/webhook", (req, res) => {
   }
 
   const prod = productos[tipo];
-  const texto = `${prod.nombre} - ${prod.precio.toLocaleString()}
+  const texto = `${prod.nombre} - ${prod.precio}
 ${prod.stock ? "Disponible en stock." : "No disponible actualmente."} ¿Qué deseas hacer?`;
 
   return res.json({
+    fulfillmentText: texto, // 👈 Esto asegura que Dialogflow siempre vea algo, aunque no entienda quickReplies
     fulfillmentMessages: [
       {
         platform: "facebook",
