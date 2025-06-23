@@ -11,7 +11,7 @@ const productos = {
   ropero: { nombre: "Ropero", precio: "C$20,000", stock: true },
   cama: { nombre: "Cama Matrimonial", precio: "C$9,000", stock: true },
   chinero: { nombre: "Chinero", precio: "C$19,500", stock: true },
-  juegosala: { nombre: "Juego de Sala", precio: "C$17,500", stock: true },
+  sofá: { nombre: "Juego de Sala", precio: "C$17,500", stock: true },
   centrotv: { nombre: "Mueble de TV", precio: "C$25,000", stock: true }
 };
 
