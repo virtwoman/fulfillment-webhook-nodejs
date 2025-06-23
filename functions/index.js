@@ -16,7 +16,7 @@ const productos = {
 };
 
 app.post("/webhook", (req, res) => {
-  const tipo = req.body.queryResult.parameters.TipoMueble?.toLowerCase();
+  const tipo = (req.body.queryResult.parameters.TipoMueble || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
   if (!tipo || !productos[tipo]) {
     return res.json({
@@ -25,7 +25,7 @@ app.post("/webhook", (req, res) => {
   }
 
   const prod = productos[tipo];
-  const texto = `${prod.nombre} - C$${prod.precio.toLocaleString()}
+  const texto = `${prod.nombre} - ${prod.precio.toLocaleString()}
 ${prod.stock ? "Disponible en stock." : "No disponible actualmente."} ¿Qué deseas hacer?`;
 
   return res.json({
