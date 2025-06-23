@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 app.use(bodyParser.json());
 // Productos disponibles
@@ -11,8 +11,7 @@ const productos = {
   ropero: { nombre: "Ropero", precio: "C$20,000", stock: true },
   cama: { nombre: "Cama Matrimonial", precio: "C$9,000", stock: true },
   chinero: { nombre: "Chinero", precio: "C$19,500", stock: true },
-  sofa: { nombre: "Juego de Sala", precio: "C$17,500", stock: true },
-  centrotv: { nombre: "Mueble de TV", precio: "C$25,000", stock: true }
+  sofa: { nombre: "Juego de Sala", precio: "C$17,500", stock: true }
 };
 
 app.post("/webhook", (req, res) => {
