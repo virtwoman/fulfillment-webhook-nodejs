@@ -14,9 +14,16 @@ const productos = {
   sofa: { nombre: "Juego de Sala", precio: "C$17,500", stock: true }
 };
 
+console.log("=== LLEGÓ UNA PETICIÓN AL WEBHOOK ===");
+console.log("Cuerpo completo:", JSON.stringify(req.body, null, 2));
+
 app.post("/webhook", (req, res) => {
   const tipo = (req.body.queryResult.parameters.TipoMueble || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+  console.log("Valor recibido de TipoMueble:", req.body.queryResult.parameters.TipoMueble);
+  console.log("Valor normalizado:", tipo);
+  console.log("Claves en productos:", Object.keys(productos));
+  
   if (!tipo || !productos[tipo]) {
     return res.json({
       fulfillmentText: "Lo siento, no tengo información sobre ese producto."
