@@ -14,9 +14,6 @@ const productos = {
   sofa: { nombre: "Juego de Sala", precio: "C$17,500", stock: true }
 };
 
-console.log("=== LLEGÓ UNA PETICIÓN AL WEBHOOK ===");
-console.log("Cuerpo completo:", JSON.stringify(req.body, null, 2));
-
 app.post("/webhook", (req, res) => {
   const tipo = (req.body.queryResult.parameters.TipoMueble || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
