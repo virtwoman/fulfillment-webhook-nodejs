@@ -29,28 +29,22 @@ app.post("/webhook", (req, res) => {
 
 const prod = productos[tipo];
 
-const texto = `${prod.nombre} - ${prod.precio}
-${prod.stock ? "Disponible en stock." : "No disponible actualmente."} ¿Qué deseas hacer?`;
+const texto = `${prod.nombre} - ${prod.precio}\n${prod.stock ? "Disponible en stock." : "No disponible actualmente."} ¿Qué deseas hacer?`;
 
 return res.json({
-  fulfillmentText: texto, // 👈 Esto asegura que Dialogflow siempre vea algo, aunque no entienda quickReplies
-
   fulfillmentMessages: [
+    {
+      text: {
+        text: [texto]  // Esta parte funciona en Dialogflow simulator y web
+      }
+    },
     {
       platform: "facebook",
       quickReplies: {
         title: texto,
         quickReplies: [
-          {
-            content_type: "text",
-            title: "Reservar",
-            payload: `RESERVAR_${prod.nombre.toUpperCase()}`
-          },
-          {
-            content_type: "text",
-            title: "Consultar otro producto",
-            payload: "CONSULTAR_OTRO"
-          }
+          "Reservar",
+          "Consultar otro producto"
         ]
       }
     }
