@@ -34,6 +34,7 @@ const texto = `${prod.nombre} - ${prod.precio}\n${prod.stock ? "Disponible en st
 return res.json({
   fulfillmentMessages: [
     {
+      platform: "PLATFORM_UNSPECIFIED",  // 👈 esta línea elimina la duplicación
       text: {
         text: [texto]  // Esta parte funciona en Dialogflow simulator y web
       }
